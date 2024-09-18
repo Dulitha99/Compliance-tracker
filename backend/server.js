@@ -6,6 +6,7 @@ import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
 import authRoutes from './routes/auth.routes.js';
 import userRoutes from './routes/user.routes.js';
+import policyRoutes from './routes/policy.routes.js';
 import connectToMongoDB from './db/connectToMongoDB.js';
 
 dotenv.config();
@@ -47,6 +48,7 @@ app.use(limiter);
 
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/policy', policyRoutes);
 
 app.use(express.static(path.join(__dirname, '/frontend/dist')));
 
