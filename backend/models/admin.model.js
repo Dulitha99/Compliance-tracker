@@ -16,18 +16,12 @@ const userSchema = mongoose.Schema(
       required: true,
       unique: true,
     },
-    verificationKey: {
-      type: String,
-    },
-    keyExpires: {
-      type: Date,
-    },
   },
   {
     timestamps: true,
   }
 );
 
-const User = mongoose.model("User", userSchema);
+const User = mongoose.model("Admin", userSchema);
 
 export default User;

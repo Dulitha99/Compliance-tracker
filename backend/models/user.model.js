@@ -7,9 +7,9 @@ const userSchema = mongoose.Schema(
       required: true,
       unique: true,
     },
-    company:{
-        type:String,
-        required:true,
+    company: {
+      type: String,
+      required: true,
     },
     password: {
       type: String,
@@ -24,18 +24,13 @@ const userSchema = mongoose.Schema(
       required: true,
       unique: true,
     },
-    // verificationKey: {
-    //   type: String,
-    // },
-    // keyExpires: {
-    //   type: Date,
-    // },
   },
   {
     timestamps: true,
   }
 );
 
-const User = mongoose.model("User", userSchema);
+// Check if model already exists
+const User = mongoose.models.User || mongoose.model("User", userSchema);
 
 export default User;
