@@ -1,18 +1,16 @@
-import User from "../models/user.model.js";
+import User from "../models/user.model.js"; // Adjust the path if necessary
 
-export const getUsersByCompany = async (req, res) => {
+// Function to get all users
+export const getAllUsers = async (req, res) => {
   try {
-    const { company } = req.query;  
+    const users = await User.find(); // Retrieve all users
 
-    if (!company) {
-      return res.status(400).json({ error: "Company name is required" });
+    if (users.length === 0) {
+      return res.status(404).json({ message: "No users found." });
     }
 
-    const filteredUsers = await User.find({ company }).select("-password");
-
-    res.status(200).json(filteredUsers);
+    res.status(200).json(users);
   } catch (error) {
-    console.error("Error in getUsersByCompany: ", error.message);
-    res.status(500).json({ error: "Internal server error" });
+    res.status(500).json({ message: "Server error", error: error.message });
   }
 };

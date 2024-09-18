@@ -1,8 +1,9 @@
 import express from "express";
-import {getUsersByCompany } from "../controllers/user.controller.js";
+import { getAllUsers } from "../controllers/user.controller.js"; // Adjust the path if necessary
 
 const router = express.Router();
 
-router.get("/report", getUsersByCompany);
+// Route to get all users
+router.get("/", getAllUsers);
 
 export default router;
