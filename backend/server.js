@@ -6,7 +6,7 @@ import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
 import authRoutes from './routes/auth.routes.js';
 import userRoutes from './routes/user.routes.js';
-import companyRoutes from './routes/company.routes.js';
+import adminRoutes from './routes/admin.routes.js';
 import policyRoutes from './routes/policy.routes.js';
 import connectToMongoDB from './db/connectToMongoDB.js';
 
@@ -49,7 +49,7 @@ app.use(limiter);
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/policy', policyRoutes);
-app.use('/api/company', companyRoutes);
+app.use('/api/admin', adminRoutes);
 
 app.use(express.static(path.join(__dirname, 'frontend', 'dist')));
 
