@@ -51,11 +51,6 @@ const companySchema = mongoose.Schema(
         required: true,
       },
     },
-    status: {
-      type: String,
-      enum: ["Active", "Inactive"],
-      default: "Active",
-    },
   },
   {
     timestamps: true,

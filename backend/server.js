@@ -6,12 +6,13 @@ import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
 import authRoutes from './routes/auth.routes.js';
 import userRoutes from './routes/user.routes.js';
+import companyRoutes from './routes/company.routes.js';
 import policyRoutes from './routes/policy.routes.js';
 import connectToMongoDB from './db/connectToMongoDB.js';
 
 dotenv.config();
 
-const app = express(); // Define the app variable here
+const app = express();
 
 console.log('Email User:', process.env.EMAIL_USER);
 console.log('Email Pass:', process.env.EMAIL_PASS);
@@ -31,7 +32,6 @@ app.use(helmet({
       upgradeInsecureRequests: [],
     },
   },
-  // security headers
   frameguard: { action: 'deny' },
   hsts: { maxAge: 31536000, includeSubDomains: true, preload: true },
   xssFilter: true,
@@ -49,14 +49,15 @@ app.use(limiter);
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/policy', policyRoutes);
+app.use('/api/company', companyRoutes);
 
-app.use(express.static(path.join(__dirname, '/frontend/dist')));
+app.use(express.static(path.join(__dirname, 'frontend', 'dist')));
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'frontend', 'dist', 'index.html'));
 });
 
-app.listen(PORT, () => { // Change server to app
+app.listen(PORT, () => {
   connectToMongoDB();
   console.log(`Server Running on port ${PORT}`);
 });
