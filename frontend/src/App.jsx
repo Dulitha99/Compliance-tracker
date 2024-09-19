@@ -1,13 +1,15 @@
-import { useState } from 'react'
-import './App.css'
+import React from 'react'
+import Home from './pages/home/home'
+import Login from './pages/login/login'
+import Signup from './pages/signup/signup'
 
-function App() {
-  const [count, setCount] = useState(0)
-
+const App = () => {
   return (
-    <>
-      <button className="btn btn-primary">Primary</button>
-    </>
+    <div>
+      <Home/>
+      <Login/>
+      <Signup/>
+    </div>
   )
 }
 
