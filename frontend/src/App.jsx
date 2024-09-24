@@ -8,6 +8,7 @@ import AdminDashboard from "./pages/admin/admindashboard"
 import UserDashboard from "./pages/userdashboard/userdashboard";
 import SettingsUser from "./pages/userdashboard/settings";
 import UserPolicies from "./pages/userdashboard/policies"
+import AdminSettings from "./pages/admin/adminsettings"
 
 
 const App = () => {
@@ -22,6 +23,7 @@ const App = () => {
         <Route path="/userdashboard" element={<UserDashboard />} />
         <Route path="/usersettings" element={<SettingsUser />} />
         <Route path="/userpolicies" element={<UserPolicies />} />
+        <Route path="/adminsettings" element={<AdminSettings />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </div>
