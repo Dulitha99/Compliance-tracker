@@ -7,7 +7,7 @@ const Home = () => {
       {/* Navbar */}
       <nav className="bg-blue-600 p-4">
         <div className="container mx-auto flex justify-between items-center">
-          <a href="#" className="text-white text-2xl font-bold">SecuTrain</a>
+          <a href="#" className="text-white text-2xl font-bold">CyberX</a>
           <button className="lg:hidden text-white">
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7" />
@@ -25,7 +25,7 @@ const Home = () => {
 
       {/* Main Content */}
       <main className="py-16 px-4 lg:px-16 text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to SecuTrain</h1>
+        <h1 className="text-4xl font-bold mb-4">Welcome to CyberX</h1>
         <p className="text-lg mb-8">Enhance your security awareness with our comprehensive training programs and resources.</p>
         <a href="/signup" className="btn btn-neutral">Get Started</a>
       </main>
@@ -33,7 +33,7 @@ const Home = () => {
       {/* About Section */}
       <section id="about" className="py-16 px-4 lg:px-16 text-center">
         <h2 className="text-3xl font-bold mb-4">About Us</h2>
-        <p className="text-lg mb-8">At SecuTrain, we provide cutting-edge security training and awareness programs to help you stay ahead of potential threats. Our team of experts is dedicated to ensuring that your organization is well-equipped to handle any security challenges.</p>
+        <p className="text-lg mb-8">At CyberX, we provide cutting-edge security training and awareness programs to help you stay ahead of potential threats. Our team of experts is dedicated to ensuring that your organization is well-equipped to handle any security challenges.</p>
       </section>
 
       {/* Services Section */}
@@ -81,7 +81,7 @@ const Home = () => {
 
       {/* Footer */}
       <footer className="bg-gray-800 text-white py-4 text-center">
-        <p>&copy; 2024 SecuTrain. All rights reserved.</p>
+        <p>&copy; 2024 CyberX. All rights reserved.</p>
       </footer>
     </div>
   );

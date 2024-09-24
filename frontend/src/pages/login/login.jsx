@@ -31,7 +31,7 @@ const Login = () => {
       {/* Navbar */}
       <nav className="bg-blue-600 p-4">
         <div className="container mx-auto flex justify-between items-center">
-          <a href="/" className="text-white text-2xl font-bold">SecuTrain</a>
+          <a href="/" className="text-white text-2xl font-bold">CyberX</a>
           <div className="hidden lg:flex space-x-4">
             <a href="/" className="text-white hover:bg-blue-700 px-3 py-2 rounded">Home</a>
           </div>
