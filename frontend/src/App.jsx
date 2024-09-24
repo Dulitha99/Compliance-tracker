@@ -3,6 +3,8 @@ import React from 'react';
 import Home from './pages/home/home';
 import Login from './pages/login/login';
 import Signup from './pages/signup/signup';
+import AdminRegister from "./pages/admin/adminlogin";
+
 
 const App = () => {
   return (
@@ -11,6 +13,7 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/adminregister" element={<AdminRegister />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </div>
