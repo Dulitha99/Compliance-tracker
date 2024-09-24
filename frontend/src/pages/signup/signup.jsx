@@ -13,7 +13,7 @@ const Signup = () => {
             </svg>
           </button>
           <div className="hidden lg:flex space-x-4">
-            <a href="#home" className="text-white hover:bg-blue-700 px-3 py-2 rounded">Home</a>
+            <a href="/" className="text-white hover:bg-blue-700 px-3 py-2 rounded">Home</a>
           </div>
         </div>
       </nav>

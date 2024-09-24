@@ -27,7 +27,7 @@ const Home = () => {
       <main className="py-16 px-4 lg:px-16 text-center">
         <h1 className="text-4xl font-bold mb-4">Welcome to SecuTrain</h1>
         <p className="text-lg mb-8">Enhance your security awareness with our comprehensive training programs and resources.</p>
-        <a href="#signup" className="btn btn-neutral">Get Started</a>
+        <a href="/signup" className="btn btn-neutral">Get Started</a>
       </main>
 
       {/* About Section */}
