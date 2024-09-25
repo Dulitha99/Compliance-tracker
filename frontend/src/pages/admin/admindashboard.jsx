@@ -65,7 +65,7 @@ const Dashboard = () => {
               <Link to="/admindashboard" className="block px-4 py-2">Manage Policies</Link>
             </li>
             <li className="hover:bg-gray-700">
-              <Link to="/employees" className="block px-4 py-2">Employees</Link>
+              <Link to="/employee" className="block px-4 py-2">Employees</Link>
             </li>
             <li className="hover:bg-gray-700">
               <Link to="/reports" className="block px-4 py-2">Reports</Link>

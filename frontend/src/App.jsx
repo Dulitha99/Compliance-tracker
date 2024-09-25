@@ -9,6 +9,8 @@ import UserDashboard from "./pages/userdashboard/userdashboard";
 import SettingsUser from "./pages/userdashboard/settings";
 import UserPolicies from "./pages/userdashboard/policies"
 import AdminSettings from "./pages/admin/adminsettings"
+import Employee from "./pages/admin/employee"
+import Report from "./pages/admin/reports"
 
 
 const App = () => {
@@ -24,6 +26,8 @@ const App = () => {
         <Route path="/usersettings" element={<SettingsUser />} />
         <Route path="/userpolicies" element={<UserPolicies />} />
         <Route path="/adminsettings" element={<AdminSettings />} />
+        <Route path="/employee" element={<Employee />} />
+        <Route path="/reports" element={<Report />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </div>
