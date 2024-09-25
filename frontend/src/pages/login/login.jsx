@@ -1,83 +1,94 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import logo from '../../assets/images/logo.png';
 
 const Login = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [formData, setFormData] = useState({
+    username: '',
+    password: ''
+  });
+
   const [errors, setErrors] = useState({});
+
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    setFormData({
+      ...formData,
+      [id]: value
+    });
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Basic validation
     const newErrors = {};
-    if (!username) {
+    if (!formData.username) {
       newErrors.username = 'Username is required';
     }
-    if (!password) {
+    if (!formData.password) {
       newErrors.password = 'Password is required';
-    } else if (password.length < 6) {
+    } else if (formData.password.length < 6) {
       newErrors.password = 'Password must be at least 6 characters long';
     }
-    
+
     if (Object.keys(newErrors).length === 0) {
-      // If no errors, submit the form (here you can call your login API)
-      console.log('Form submitted:', { username: username.trim(), password: password.trim() });
+      console.log('Form submitted:', formData);
     } else {
       setErrors(newErrors);
     }
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col">
-      {/* Navbar */}
-      <nav className="bg-blue-600 p-4">
-        <div className="container mx-auto flex justify-between items-center">
-          <a href="/" className="text-white text-2xl font-bold">CyberX</a>
-          <div className="hidden lg:flex space-x-4">
-            <a href="/" className="text-white hover:bg-blue-700 px-3 py-2 rounded">Home</a>
+    <div className="flex justify-center items-center min-h-screen bg-gray-100">
+      <div className="flex w-full max-w-4xl bg-white shadow-lg">
+        <div className="w-1/2 bg-gray-900 text-white flex justify-center items-center p-8">
+          <div className="text-center">
+            <Link to="/">
+              <img src={logo} alt="CyberX Logo" className="w-48 h-48 mx-auto" />
+            </Link>
           </div>
-          <button className="lg:hidden text-white">
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7" />
-            </svg>
-          </button>
         </div>
-      </nav>
-      
-      {/* Login Form */}
-      <div className="flex-grow flex items-center justify-center">
-        <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
-          <h1 className="text-2xl font-bold mb-6 text-center">Login</h1>
+
+        <div className="w-1/2 p-8">
+          <h2 className="text-3xl font-bold mb-6">Login</h2>
+
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">Username</label>
+              <label htmlFor="username" className="block text-gray-700 font-medium mb-2">Username</label>
               <input
-                className={`form-input w-full ${errors.username ? 'border-red-500' : ''}`}
-                id="username"
                 type="text"
+                id="username"
+                className={`border ${errors.username ? 'border-red-500' : 'border-gray-300'} w-full p-3 rounded-lg focus:outline-none focus:border-indigo-500`}
                 placeholder="Your Username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value.trim())}
+                value={formData.username}
+                onChange={handleChange}
                 required
               />
-              {errors.username && <p className="text-red-500 text-xs mt-1">{errors.username}</p>}
+              {errors.username && <p className="text-red-500 text-sm mt-1">{errors.username}</p>}
             </div>
-            <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">Password</label>
+
+            <div className="mb-6">
+              <label htmlFor="password" className="block text-gray-700 font-medium mb-2">Password</label>
               <input
-                className={`form-input w-full ${errors.password ? 'border-red-500' : ''}`}
-                id="password"
                 type="password"
+                id="password"
+                className={`border ${errors.password ? 'border-red-500' : 'border-gray-300'} w-full p-3 rounded-lg focus:outline-none focus:border-indigo-500`}
                 placeholder="Your Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value.trim())}
+                value={formData.password}
+                onChange={handleChange}
                 required
               />
-              {errors.password && <p className="text-red-500 text-xs mt-1">{errors.password}</p>}
+              {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password}</p>}
             </div>
-            <button className="btn btn-neutral w-full py-2" type="submit">Login</button>
-            <p className="text-center mt-4">
-              Don't have an account? <a href="/signup" className="text-blue-600 hover:underline">Register here</a>
-            </p>
+
+            <button className="bg-blue-800 text-white w-full py-3 rounded-lg font-semibold hover:bg-blue-900">Login</button>
+
+            <div className="mt-6 text-center">
+              <p>Don't have an account? <Link to="/signup" className="text-blue-600 hover:underline">Register here</Link></p>
+            </div>
+
+            <div className="mt-4 text-center">
+              <p>Want to go back? <Link to="/" className="text-blue-600 hover:underline">Home</Link></p>
+            </div>
           </form>
         </div>
       </div>
