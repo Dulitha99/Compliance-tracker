@@ -8,25 +8,35 @@ const App = () => {
         <nav className="container mx-auto flex justify-between items-center px-6">
           <div className="text-3xl font-bold">CYBERX</div>
           <ul className="flex space-x-6">
-            <li><a href="#" className="hover:text-gray-300">Home</a></li>
-            <li><a href="#" className="hover:text-gray-300">Features</a></li>
-            <li><a href="#" className="hover:text-gray-300">Pricing</a></li>
-            <li><a href="#" className="hover:text-gray-300">Company</a></li>
-            <li><a href="#" className="hover:text-gray-300">Contact</a></li>
+            <li><a href="#home" className="hover:text-gray-300">Home</a></li>
+            <li><a href="#features" className="hover:text-gray-300">Features</a></li>
+            <li><a href="#pricing" className="hover:text-gray-300">Pricing</a></li>
+            <li><a href="#about" className="hover:text-gray-300">About</a></li>
+            <li><a href="#contact" className="hover:text-gray-300">Contact</a></li>
           </ul>
           <div className="space-x-4">
-            <a href="#" className="btn btn-outline btn-sm">Login</a>
+            <a href="/login" className="btn btn-outline btn-sm">Login</a>
           </div>
         </nav>
       </header>
 
-      <section className="text-center py-16">
+      {/* Hero Section */}
+      <section id="home" className="text-center py-16">
         <h1 className="text-5xl font-bold">Welcome to CyberX</h1>
         <p className="mt-4 text-xl">Enhance your security awareness with our comprehensive training programs and resources.</p>
-        <a href="#" className="btn btn-primary mt-8">Get Started</a>
+        <a href="/signup" className="btn btn-primary mt-8">Get Started</a>
       </section>
 
-      <section className="py-16 bg-white text-gray-800">
+      {/* About Section */}
+<section id="about" className="py-16 px-4 lg:px-16 bg-white text-center">
+  <h2 className="text-3xl font-bold mb-4 text-black">About Us</h2>
+  <p className="text-lg mb-8 text-black">At CyberX, we provide cutting-edge security training and awareness programs to help you stay ahead of potential threats. Our team of experts is dedicated to ensuring that your organization is well-equipped to handle any security challenges.</p>
+  <p className="text-lg text-black">We focus on creating an informed community that can identify and mitigate risks effectively. Join us in building a safer digital world.</p>
+</section>
+
+
+      {/* Features Section */}
+      <section className="py-16 bg-white text-gray-800" id="features">
         <h2 className="text-center text-4xl font-bold text-gray-900 mb-10">Our Features</h2>
         <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 px-6">
           <div className="text-center">
@@ -47,7 +57,8 @@ const App = () => {
         </div>
       </section>
 
-      <section className="py-16 bg-gray-100 text-gray-800">
+      {/* Pricing Section */}
+      <section className="py-16 bg-gray-100 text-gray-800" id="pricing">
         <h2 className="text-center text-4xl font-bold text-gray-900 mb-10">Simple Pricing - No Fuss</h2>
         <div className="container mx-auto flex flex-col md:flex-row justify-around items-center gap-10 px-6">
           <div className="card w-80 bg-white shadow-lg">
@@ -111,9 +122,10 @@ const App = () => {
           <a href="#" className="text-white hover:text-blue-400">Twitter</a>
           <a href="#" className="text-white hover:text-blue-400">LinkedIn</a>
         </div>
-        <p className="mt-4">For inquiries, contact us at <a href="mailto:info@cyberx.com" className="text-blue-400">info@cyberx.com</a></p>
+        <p className="mt-4">For inquiries, contact us at <a href="mailto:cyberX@gmail.com" className="text-blue-400">cyberX@gmail.com</a></p>
       </footer>
     </div>
+
   );
 };
 
