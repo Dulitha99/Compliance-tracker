@@ -1,22 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
+import logo from '../../assets/images/logo.png';
+import { FiSettings } from 'react-icons/fi';
 
 const Settings = () => {
-  const [userInfo, setUserInfo] = useState({
-    username: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
-  });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setUserInfo({ ...userInfo, [name]: value });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('User Info:', userInfo);
+  // Dummy user data
+  const userInfo = {
+    username: 'johndoe',
+    company: 'CYBERX Solutions',
+    jobRole: 'Software Engineer',
+    email: 'johndoe@cyberx.com',
   };
 
   const handleLogout = () => {
@@ -24,107 +17,57 @@ const Settings = () => {
   };
 
   return (
-    <div className="flex min-h-screen">
-      <aside className="w-64 bg-gray-800 text-white min-h-screen">
-        <div className="p-4">
-          <h2 className="text-2xl font-bold">User Dashboard</h2>
+    <div className="flex min-h-screen bg-gray-50">
+      <aside className="w-64 bg-[#1F2937] text-white shadow-md">
+        <div className="p-4 flex items-center justify-center border-b border-gray-700">
+          <img src={logo} alt="CYBERX Logo" className="h-24 w-24 object-contain" />
         </div>
-        <nav className="mt-6">
-          <ul>
-            <li className="hover:bg-gray-700">
-              <Link to="/userdashboard" className="block px-4 py-2">Trainings</Link>
+        <nav className="mt-6 px-4">
+          <ul className="space-y-2">
+            <li className="hover:bg-[#1337aa] rounded-md">
+              <Link to="/userdashboard" className="block px-4 py-2 text-lg font-semibold">
+                Trainings
+              </Link>
             </li>
-            <li className="hover:bg-gray-700">
-              <Link to="/userpolicies" className="block px-4 py-2">Policies</Link>
+            <li className="hover:bg-[#1337aa] rounded-md">
+              <Link to="/userpolicies" className="block px-4 py-2 text-lg font-semibold">
+                Policies
+              </Link>
             </li>
-            <li className="hover:bg-gray-700">
-              <Link to="/usersettings" className="block px-4 py-2">Settings</Link>
+            <li className="hover:bg-[#1337aa] rounded-md">
+              <Link to="/usersettings" className="block px-4 py-2 text-lg font-semibold flex items-center">
+                <FiSettings className="mr-2" /> Settings
+              </Link>
             </li>
           </ul>
         </nav>
       </aside>
 
+      <main className="flex-1 p-8 bg-gray-100">
+        <h1 className="text-4xl font-bold mb-6 text-gray-800">User Settings</h1>
 
-      <main className="flex-1 p-6 bg-gray-100">
-        <h1 className="text-3xl font-bold mb-6 text-gray-700">Settings</h1>
-
-    
-        <section className="mb-12">
-          <h2 className="text-2xl font-semibold mb-4 text-gray-600">Update Profile</h2>
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
-              <label className="block mb-2 text-sm font-medium text-gray-700" htmlFor="username">Username</label>
-              <input
-                type="text"
-                id="username"
-                name="username"
-                value={userInfo.username}
-                onChange={handleChange}
-                className="border border-gray-300 p-2 rounded w-full"
-                required
-              />
-            </div>
-            <div>
-              <label className="block mb-2 text-sm font-medium text-gray-700" htmlFor="email">Email</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={userInfo.email}
-                onChange={handleChange}
-                className="border border-gray-300 p-2 rounded w-full"
-                required
-              />
-            </div>
-            <div>
-              <label className="block mb-2 text-sm font-medium text-gray-700" htmlFor="password">New Password</label>
-              <input
-                type="password"
-                id="password"
-                name="password"
-                value={userInfo.password}
-                onChange={handleChange}
-                className="border border-gray-300 p-2 rounded w-full"
-                required
-              />
-            </div>
-            <div>
-              <label className="block mb-2 text-sm font-medium text-gray-700" htmlFor="confirmPassword">Confirm Password</label>
-              <input
-                type="password"
-                id="confirmPassword"
-                name="confirmPassword"
-                value={userInfo.confirmPassword}
-                onChange={handleChange}
-                className="border border-gray-300 p-2 rounded w-full"
-                required
-              />
-            </div>
-            <button type="submit" className="mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
-              Update Profile
-            </button>
-          </form>
-        </section>
-
-        <section>
-          <h2 className="text-2xl font-semibold mb-4 text-gray-600">Other Settings</h2>
+        <section className="mb-12 bg-white shadow-lg rounded-lg p-6">
+          <h2 className="text-3xl font-semibold mb-4 text-gray-700">User Information</h2>
           <div className="space-y-4">
-            <div className="flex items-center">
-              <input type="checkbox" id="notifications" className="mr-2" />
-              <label htmlFor="notifications" className="text-gray-700">Enable Notifications</label>
+            <div>
+              <span className="font-medium text-gray-700">Username:</span>
+              <p className="text-gray-600">{userInfo.username}</p>
             </div>
-            <div className="flex items-center">
-              <input type="checkbox" id="darkMode" className="mr-2" />
-              <label htmlFor="darkMode" className="text-gray-700">Dark Mode</label>
+            <div>
+              <span className="font-medium text-gray-700">Company:</span>
+              <p className="text-gray-600">{userInfo.company}</p>
             </div>
-            <div className="flex items-center">
-              <input type="checkbox" id="privacy" className="mr-2" />
-              <label htmlFor="privacy" className="text-gray-700">Enable Privacy Mode</label>
+            <div>
+              <span className="font-medium text-gray-700">Job Role:</span>
+              <p className="text-gray-600">{userInfo.jobRole}</p>
+            </div>
+            <div>
+              <span className="font-medium text-gray-700">Email:</span>
+              <p className="text-gray-600">{userInfo.email}</p>
             </div>
           </div>
         </section>
 
-       
         <button onClick={handleLogout} className="mt-6 bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">
           Logout
         </button>
