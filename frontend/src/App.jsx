@@ -3,7 +3,8 @@ import React from 'react';
 import Home from './pages/home/home';
 import Login from './pages/login/login';
 import Signup from './pages/signup/signup';
-import AdminRegister from "./pages/admin/adminlogin";
+import Admin from './pages/admin/admin';
+import AdminRegister from "./pages/admin/adminregister";
 import AdminDashboard from "./pages/admin/admindashboard"
 import UserDashboard from "./pages/userdashboard/userdashboard";
 import SettingsUser from "./pages/userdashboard/settings";
@@ -20,6 +21,7 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/admin" element={<Admin />} />
         <Route path="/adminregister" element={<AdminRegister />} />
         <Route path="/admindashboard" element={<AdminDashboard />} />
         <Route path="/userdashboard" element={<UserDashboard />} />
