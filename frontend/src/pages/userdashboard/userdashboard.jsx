@@ -81,7 +81,7 @@ const Trainings = () => {
         </nav>
       </aside>
 
-      {/* User Dashboard Main Content */}
+ 
       <main className="flex-1 p-8 bg-gray-100">
         <h1 className="text-3xl font-bold mb-6 text-[#1337aa]">Security Awareness Trainings</h1>
 
