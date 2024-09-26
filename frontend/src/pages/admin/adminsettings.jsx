@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FiSettings } from 'react-icons/fi';
+import logo from '../../assets/images/logo.png';
 
 const Settings = () => {
   const adminDetails = {
@@ -26,31 +27,36 @@ const Settings = () => {
   };
 
   return (
-    <div className="flex min-h-screen">
-      {/* Sidebar Section */}
-      <aside className="w-64 bg-gray-800 text-white min-h-screen">
-        <div className="p-4">
-          <h2 className="text-2xl font-bold">Admin Dashboard</h2>
-        </div>
-        <nav className="mt-6">
-          <ul>
-            <li className="hover:bg-gray-700">
-              <Link to="/admindashboard" className="block px-4 py-2">Manage Policies</Link>
-            </li>
-            <li className="hover:bg-gray-700">
-              <Link to="/employee" className="block px-4 py-2">Employees</Link>
-            </li>
-            <li className="hover:bg-gray-700">
-              <Link to="/reports" className="block px-4 py-2">Reports</Link>
-            </li>
-            <li className="hover:bg-gray-700">
-              <Link to="/adminsettings" className="block px-4 py-2 flex items-center">
-                <FiSettings className="mr-2" /> Settings
-              </Link>
-            </li>
-          </ul>
-        </nav>
-      </aside>
+    <div className="flex min-h-screen bg-gray-50">
+    <aside className="w-64 bg-[#1F2937] text-white shadow-md">
+      <div className="p-4 flex items-center justify-center border-b border-gray-700">
+        <img src={logo} alt="CYBERX Logo" className="h-24 w-24 object-contain" />
+      </div>
+      <nav className="mt-6 px-4">
+        <ul className="space-y-2">
+          <li className="hover:bg-[#1337aa] rounded-md">
+            <Link to="/admindashboard" className="block px-4 py-2 text-lg font-semibold">
+              Manage Policies
+            </Link>
+          </li>
+          <li className="hover:bg-[#1337aa] rounded-md">
+            <Link to="/employee" className="block px-4 py-2 text-lg font-semibold">
+              Employees
+            </Link>
+          </li>
+          <li className="hover:bg-[#1337aa] rounded-md">
+            <Link to="/reports" className="block px-4 py-2 text-lg font-semibold">
+              Reports
+            </Link>
+          </li>
+          <li className="hover:bg-[#1337aa] rounded-md">
+            <Link to="/adminsettings" className="block px-4 py-2 text-lg font-semibold flex items-center">
+              <FiSettings className="mr-2" /> Settings
+            </Link>
+          </li>
+        </ul>
+      </nav>
+    </aside>
 
       {/* Settings Page Main Content */}
       <main className="flex-1 p-6 bg-gray-100">
