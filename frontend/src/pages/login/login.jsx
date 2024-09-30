@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../assets/images/logo.png';
+import useUserLogin from '../../hooks/useLogin';  // Import your custom hook
 
 const Login = () => {
   const [formData, setFormData] = useState({
     username: '',
     password: ''
   });
+  
+  const { loading, login } = useUserLogin();  // Destructure the hook's return values
 
   const [errors, setErrors] = useState({});
 
@@ -20,6 +23,7 @@ const Login = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
     const newErrors = {};
     if (!formData.username) {
       newErrors.username = 'Username is required';
@@ -31,7 +35,8 @@ const Login = () => {
     }
 
     if (Object.keys(newErrors).length === 0) {
-      console.log('Form submitted:', formData);
+      // Call the login function from useUserLogin hook
+      login(formData.username, formData.password);
     } else {
       setErrors(newErrors);
     }
@@ -80,7 +85,12 @@ const Login = () => {
               {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password}</p>}
             </div>
 
-            <button className="bg-blue-800 text-white w-full py-3 rounded-lg font-semibold hover:bg-blue-900">Login</button>
+            <button 
+              className={`bg-blue-800 text-white w-full py-3 rounded-lg font-semibold hover:bg-blue-900 ${loading ? 'opacity-50 cursor-not-allowed' : ''}`} 
+              disabled={loading}
+            >
+              {loading ? 'Logging in...' : 'Login'}
+            </button>
 
             <div className="mt-6 text-center">
               <p>Don't have an account? <Link to="/signup" className="text-blue-600 hover:underline">Register here</Link></p>

@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../assets/images/logo.png';
 import { FiSettings } from 'react-icons/fi';
+import useUserLogout from '../../hooks/useUserLogout'; // Import the user logout hook
 
 const Settings = () => {
   // Dummy user data
@@ -12,8 +13,10 @@ const Settings = () => {
     email: 'johndoe@cyberx.com',
   };
 
-  const handleLogout = () => {
-    console.log('User logged out');
+  const { loading, logout } = useUserLogout(); // Use the user logout hook
+
+  const handleLogout = async () => {
+    await logout(); // Call the logout function from the hook
   };
 
   return (
@@ -68,8 +71,12 @@ const Settings = () => {
           </div>
         </section>
 
-        <button onClick={handleLogout} className="mt-6 bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">
-          Logout
+        <button 
+          onClick={handleLogout} 
+          className="mt-6 bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700" 
+          disabled={loading} // Disable the button while loading
+        >
+          {loading ? "Logging out..." : "Logout"} {/* Show loading text while logging out */}
         </button>
       </main>
     </div>
