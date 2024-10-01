@@ -8,7 +8,7 @@ const useUserDetails = () => {
   useEffect(() => {
     const fetchUserDetails = async () => {
       try {
-        // Simulate fetching user data from an API or local storage
+  
         const userData = JSON.parse(localStorage.getItem('user')) || {
           username: 'defaultUser',
           company: 'defaultCompany',

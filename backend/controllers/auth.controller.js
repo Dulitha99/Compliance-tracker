@@ -3,14 +3,14 @@ import User from "../models/user.model.js";
 import generateTokenAndSetCookie from "../utils/generateToken.js";
 import { body, validationResult } from "express-validator";
 
-// User signup controller
 export const signup = [
   body("username").isAlphanumeric().withMessage("Username must be alphanumeric."),
   body("email").isEmail().withMessage("Invalid email."),
   body("password").isLength({ min: 6 }).withMessage("Password must be at least 6 characters long."),
   body("confirmPassword").custom((value, { req }) => value === req.body.password).withMessage("Passwords don't match."),
-  body("gender").trim().escape(),
   body("company").notEmpty().withMessage("Company is required."),
+  body("jobRole").notEmpty().withMessage("Job role is required."),
+  body("department").notEmpty().withMessage("Department is required."),
 
   async (req, res) => {
     try {
@@ -19,23 +19,23 @@ export const signup = [
         return res.status(400).json({ errors: errors.array() });
       }
 
-      const { username, password, gender, company, email } = req.body;
+      const { username, password, company, email, jobRole, department } = req.body;
 
       const existingUser = await User.findOne({ username });
       if (existingUser) {
         return res.status(400).json({ error: "Username already exists" });
       }
 
-      // Hash password
       const salt = await bcrypt.genSalt(10);
       const hashedPassword = await bcrypt.hash(password, salt);
 
       const newUser = new User({
         username,
         password: hashedPassword,
-        gender,
         company,
         email,
+        jobRole,
+        department,
       });
 
       await newUser.save();
@@ -44,7 +44,10 @@ export const signup = [
       res.status(201).json({
         _id: newUser._id,
         username: newUser.username,
+        email: newUser.email,
         company: newUser.company,
+        jobRole: newUser.jobRole,
+        department: newUser.department,
       });
     } catch (error) {
       console.log("Error in signup controller", error.message);
@@ -53,7 +56,6 @@ export const signup = [
   },
 ];
 
-// User login controller
 export const userLogin = [
   body("username").isAlphanumeric().withMessage("Invalid username."),
   body("password").isLength({ min: 6 }).withMessage("Invalid password."),
@@ -81,7 +83,10 @@ export const userLogin = [
       res.status(200).json({
         _id: user._id,
         username: user.username,
+        email: user.email,
         company: user.company,
+        jobRole: user.jobRole,
+        department: user.department,
       });
     } catch (error) {
       console.log("Error in user login controller", error.message);
@@ -90,7 +95,6 @@ export const userLogin = [
   },
 ];
 
-// User logout controller
 export const userLogout = (req, res) => {
   try {
     res.cookie("jwt", "", { maxAge: 0 });

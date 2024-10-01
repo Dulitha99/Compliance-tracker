@@ -15,14 +15,22 @@ const userSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    gender: {
-      type: String,
-      required: true,
-    },
     email: {
       type: String,
       required: true,
       unique: true,
+    },
+    jobRole: {
+      type: String,
+      required: true,
+    },
+    department: {
+      type: String,
+      required: true,
+    },
+    role: {
+      type: String,
+      default: "user",
     },
   },
   {
@@ -30,7 +38,7 @@ const userSchema = mongoose.Schema(
   }
 );
 
-// Check if model already exists
+
 const User = mongoose.models.User || mongoose.model("User", userSchema);
 
 export default User;
