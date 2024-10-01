@@ -21,11 +21,11 @@ const App = () => {
     <div>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={authUser ? <Navigate to={authUser.role === 'admin' ? '/admindashboard' : '/userdashboard'} /> : <Login />} />
+        <Route path="/login" element={authUser ? <Navigate to="/userdashboard" /> : <Login />} />
         <Route path="/signup" element={authUser ? <Navigate to={authUser.role === 'admin' ? '/admindashboard' : '/userdashboard'} /> : <Signup />} />
         
         {/* Admin Routes */}
-        <Route path="/admin" element={authUser && authUser.role === 'admin' ? <Admin /> : <Navigate to="/login" />} />
+        <Route path="/admin" element={<Admin />} />
         <Route path="/adminregister" element={authUser && authUser.role === 'admin' ? <AdminRegister /> : <Navigate to="/login" />} />
         <Route path="/admindashboard" element={authUser && authUser.role === 'admin' ? <AdminDashboard /> : <Navigate to="/login" />} />
         <Route path="/adminsettings" element={authUser && authUser.role === 'admin' ? <AdminSettings /> : <Navigate to="/login" />} />

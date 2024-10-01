@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate
 import logo from '../../assets/images/logo.png';
-import useUserLogin from '../../hooks/useLogin';  // Import your custom hook
+import useUserLogin from '../../hooks/useLogin';
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -9,8 +9,8 @@ const Login = () => {
     password: ''
   });
   
-  const { loading, login } = useUserLogin();  // Destructure the hook's return values
-
+  const { loading, login } = useUserLogin();
+  const navigate = useNavigate(); // Initialize useNavigate
   const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
@@ -21,7 +21,7 @@ const Login = () => {
     });
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     const newErrors = {};
@@ -36,7 +36,11 @@ const Login = () => {
 
     if (Object.keys(newErrors).length === 0) {
       // Call the login function from useUserLogin hook
-      login(formData.username, formData.password);
+      const user = await login(formData.username, formData.password);
+      if (user) {
+        // Redirect to user dashboard after successful login
+        navigate('/userdashboard');
+      }
     } else {
       setErrors(newErrors);
     }
