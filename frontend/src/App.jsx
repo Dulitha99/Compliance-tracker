@@ -12,10 +12,10 @@ import UserPolicies from "./pages/userdashboard/policies";
 import AdminSettings from "./pages/admin/adminsettings";
 import Employee from "./pages/admin/employee";
 import Report from "./pages/admin/reports";
-import { useAuthContext } from "./context/AuthContext"; // Import your AuthContext
+import { useAuthContext } from "./context/AuthContext";
 
 const App = () => {
-  const { authUser } = useAuthContext(); // Get the authUser from context
+  const { authUser } = useAuthContext(); 
 
   return (
     <div>
@@ -24,20 +24,17 @@ const App = () => {
         <Route path="/login" element={authUser ? <Navigate to={authUser.role === 'admin' ? "/admindashboard" : "/userdashboard"} /> : <Login />} />
         <Route path="/signup" element={authUser ? <Navigate to="/userdashboard" /> : <Signup />} />
 
-        {/* Admin Routes */}
-        <Route path="/admin" element={authUser?.role === 'admin' ? <Admin /> : <Navigate to="/login" />} />
+        <Route path="/admin" element={<Admin />}/>
         <Route path="/adminregister" element={authUser?.role === 'admin' ? <AdminRegister /> : <Navigate to="/login" />} />
         <Route path="/admindashboard" element={authUser?.role === 'admin' ? <AdminDashboard /> : <Navigate to="/login" />} />
         <Route path="/adminsettings" element={authUser?.role === 'admin' ? <AdminSettings /> : <Navigate to="/login" />} />
         <Route path="/employee" element={authUser?.role === 'admin' ? <Employee /> : <Navigate to="/login" />} />
         <Route path="/reports" element={authUser?.role === 'admin' ? <Report /> : <Navigate to="/login" />} />
 
-        {/* Protected User Routes */}
         <Route path="/userdashboard" element={authUser?.role === 'user' ? <UserDashboard /> : <Navigate to="/login" />} />
         <Route path="/usersettings" element={authUser?.role === 'user' ? <SettingsUser /> : <Navigate to="/login" />} />
         <Route path="/userpolicies" element={authUser?.role === 'user' ? <UserPolicies /> : <Navigate to="/login" />} />
-
-        {/* Fallback Route */}
+    
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </div>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../assets/images/logo.png';
-import useAdminLogin from '../../hooks/useadminLogin'; // Adjust the path
+import useAdminLogin from '../../hooks/useadminLogin'; 
 
 const AdminLogin = () => {
   const [formData, setFormData] = useState({

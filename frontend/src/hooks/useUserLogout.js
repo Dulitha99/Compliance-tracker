@@ -3,36 +3,37 @@ import { useAuthContext } from "../context/AuthContext";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
-const useUserLogout = () => {
+const useLogout = () => {
   const [loading, setLoading] = useState(false);
-  const { setAuthUser } = useAuthContext();
-  const navigate = useNavigate(); // Use navigate for redirection
-
+  const { setAuthUser, authUser } = useAuthContext(); 
+  const navigate = useNavigate(); 
   const logout = async () => {
     setLoading(true);
     try {
-      const res = await fetch("/api/auth/logout", {
+      const isAdmin = authUser?.role === "admin"; 
+
+      const res = await fetch(isAdmin ? "/api/admin/adminlogout" : "/api/auth/logout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
       });
 
-      // Check if the response status is OK (200-299)
+     
       if (!res.ok) {
         const errorData = await res.json();
         throw new Error(errorData.error || "Logout failed");
       }
 
-      // Clear local storage and auth context
-      localStorage.removeItem("user"); // Change to "user" for user logout
-      setAuthUser(null); // Clear the authUser in context
-      toast.success("Logout successful!"); // Show success toast
+     
+      localStorage.removeItem(isAdmin ? "admin" : "user"); 
+      setAuthUser(null); 
+      toast.success("Logout successful!");
 
-      // Navigate to the home page
+     
       navigate("/");
     } catch (error) {
-      // Handle errors and provide feedback
-      console.error("Logout error:", error); // Log error for debugging
-      toast.error(error.message || "An error occurred during logout."); // Show error toast
+      
+      console.error("Logout error:", error);
+      toast.error(error.message || "An error occurred during logout.");
     } finally {
       setLoading(false);
     }
@@ -41,4 +42,4 @@ const useUserLogout = () => {
   return { loading, logout };
 };
 
-export default useUserLogout;
+export default useLogout;

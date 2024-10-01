@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuthContext } from '../context/AuthContext'; // Adjust the path as necessary
+import { useAuthContext } from '../context/AuthContext'; 
 import toast from 'react-hot-toast';
 
 const useAdminLogin = () => {
@@ -14,7 +14,7 @@ const useAdminLogin = () => {
     setError(null);
 
     try {
-      // Debugging the request body
+     
       console.log("Login request data:", {
         username: formData.adminUsername,
         password: formData.adminPassword,
@@ -31,38 +31,38 @@ const useAdminLogin = () => {
         }),
       });
 
-      const textResponse = await response.text(); // Get the response as text
+      const textResponse = await response.text(); 
 
-      // Try to parse as JSON
+     
       let adminData;
       try {
         adminData = JSON.parse(textResponse);
       } catch (parseError) {
         console.error("Parsing error:", parseError.message);
-        console.error("Raw response text:", textResponse); // Log the raw response
+        console.error("Raw response text:", textResponse); 
         setError('Unexpected server response.');
         toast.error('Unexpected server response.');
         return;
       }
 
       if (!response.ok) {
-        // Handle error response
+       
         console.error("Login Error:", adminData);
         setError(adminData.error || 'Login failed. Please check your credentials.');
         toast.error(adminData.error || 'Login failed. Please check your credentials.');
         return;
       }
 
-      // On successful login, store admin in localStorage and set auth context
-      console.log("Login successful, received data:", adminData); // Debugging the response
+      
+      console.log("Login successful, received data:", adminData); 
       localStorage.setItem('admin', JSON.stringify(adminData));
       setAuthUser({ ...adminData, role: 'admin' });
 
-      // Navigate to the admin dashboard
+     
       navigate('/admindashboard');
       toast.success('Logged in successfully');
     } catch (err) {
-      console.error("Login Error:", err.message); // Log the exact error response
+      console.error("Login Error:", err.message); 
       setError('An unexpected error occurred.');
       toast.error('An unexpected error occurred.');
     } finally {

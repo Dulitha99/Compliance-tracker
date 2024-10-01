@@ -2,8 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { FiSettings } from 'react-icons/fi';
 import logo from '../../assets/images/logo.png';
+import useLogout from '../../hooks/useUserLogout'; 
 
 const Settings = () => {
+  const { loading, logout } = useLogout(); 
   const adminDetails = {
     username: "adminUser123",
     email: "admin@example.com",
@@ -58,7 +60,7 @@ const Settings = () => {
         </nav>
       </aside>
 
-      {/* Settings Page Main Content */}
+    
       <main className="flex-1 p-8 bg-gray-100">
         <div className="bg-white p-8 rounded-lg shadow-lg max-w-2xl mx-auto">
           <h2 className="text-3xl font-bold mb-6 text-[#1337aa]">Admin Details</h2>
@@ -75,9 +77,13 @@ const Settings = () => {
             <p className="text-lg"><strong>Email:</strong> {adminDetails.company.contactInfo.email}</p>
             <p className="text-lg"><strong>Phone:</strong> {adminDetails.company.contactInfo.phone}</p>
           </div>
-          <Link to="/logout" className="mt-6 inline-block bg-red-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700 transition duration-300">
-            Logout
-          </Link>
+          <button 
+            onClick={logout} 
+            disabled={loading} 
+            className={`mt-6 inline-block ${loading ? 'bg-gray-600' : 'bg-red-600'} text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700 transition duration-300`}
+          >
+            {loading ? 'Logging out...' : 'Logout'}
+          </button>
         </div>
       </main>
     </div>
