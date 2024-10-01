@@ -8,23 +8,21 @@ export const AuthProvider = ({ children }) => {
   const [authUser, setAuthUser] = useState(null);
 
   useEffect(() => {
-    // Check for admin first
     const storedAdmin = localStorage.getItem("admin");
     if (storedAdmin) {
-      setAuthUser({ ...JSON.parse(storedAdmin), role: 'admin' }); // Set role to admin
+      setAuthUser({ ...JSON.parse(storedAdmin), role: 'admin' });
       return;
     }
 
-    // Check for user if no admin is found
     const storedUser = localStorage.getItem("user");
     if (storedUser) {
-      setAuthUser({ ...JSON.parse(storedUser), role: 'user' }); // Set role to user
+      setAuthUser({ ...JSON.parse(storedUser), role: 'user' });
     }
   }, []);
 
   const logout = () => {
-    localStorage.removeItem("admin"); // Remove admin if present
-    localStorage.removeItem("user");  // Remove user if present
+    localStorage.removeItem("admin");
+    localStorage.removeItem("user");
     setAuthUser(null);
   };
 

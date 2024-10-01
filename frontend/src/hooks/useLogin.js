@@ -10,6 +10,8 @@ const useUserLogin = () => {
 		const success = handleInputErrors(username, password);
 		if (!success) return;
 		setLoading(true);
+		let userData = null;
+
 		try {
 			const res = await fetch("/api/auth/login", {
 				method: "POST",
@@ -22,18 +24,21 @@ const useUserLogin = () => {
 				throw new Error(data.error);
 			}
 
-			// No role check for regular users
-			localStorage.setItem("user", JSON.stringify(data));
-			setAuthUser(data);
+			userData = { ...data, role: 'user' }; // Assuming a user role is returned
+			localStorage.setItem("user", JSON.stringify(userData));
+			setAuthUser(userData);
 		} catch (error) {
 			toast.error(error.message);
 		} finally {
 			setLoading(false);
 		}
+
+		return userData; // Return user data
 	};
 
 	return { loading, login };
 };
+
 export default useUserLogin;
 
 function handleInputErrors(username, password) {
