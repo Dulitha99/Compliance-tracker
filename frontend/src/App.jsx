@@ -22,20 +22,20 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={authUser ? <Navigate to="/userdashboard" /> : <Login />} />
-        <Route path="/signup" element={authUser ? <Navigate to={authUser.role === 'admin' ? '/admindashboard' : '/userdashboard'} /> : <Signup />} />
-        
+        <Route path="/signup" element={authUser ? <Navigate to="/userdashboard" /> : <Signup />} />
+
         {/* Admin Routes */}
         <Route path="/admin" element={<Admin />} />
-        <Route path="/adminregister" element={authUser && authUser.role === 'admin' ? <AdminRegister /> : <Navigate to="/login" />} />
-        <Route path="/admindashboard" element={authUser && authUser.role === 'admin' ? <AdminDashboard /> : <Navigate to="/login" />} />
-        <Route path="/adminsettings" element={authUser && authUser.role === 'admin' ? <AdminSettings /> : <Navigate to="/login" />} />
-        <Route path="/employee" element={authUser && authUser.role === 'admin' ? <Employee /> : <Navigate to="/login" />} />
-        <Route path="/reports" element={authUser && authUser.role === 'admin' ? <Report /> : <Navigate to="/login" />} />
-        
-        {/* User Routes */}
-        <Route path="/userdashboard" element={authUser && authUser.role === 'user' ? <UserDashboard /> : <Navigate to="/login" />} />
-        <Route path="/usersettings" element={authUser && authUser.role === 'user' ? <SettingsUser /> : <Navigate to="/login" />} />
-        <Route path="/userpolicies" element={authUser && authUser.role === 'user' ? <UserPolicies /> : <Navigate to="/login" />} />
+        <Route path="/adminregister" element={<AdminRegister />} />
+        <Route path="/admindashboard" element={<AdminDashboard />} />
+        <Route path="/adminsettings" element={<AdminSettings />} />
+        <Route path="/employee" element={<Employee />} />
+        <Route path="/reports" element={<Report />} />
+
+        {/* Protected User Routes */}
+        <Route path="/userdashboard" element={authUser ? <UserDashboard /> : <Navigate to="/login" />} />
+        <Route path="/usersettings" element={authUser ? <SettingsUser /> : <Navigate to="/login" />} />
+        <Route path="/userpolicies" element={authUser ? <UserPolicies /> : <Navigate to="/login" />} />
 
         {/* Fallback Route */}
         <Route path="*" element={<Navigate to="/" />} />

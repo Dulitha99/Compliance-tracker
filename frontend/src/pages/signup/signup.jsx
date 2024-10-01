@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../assets/images/logo.png';
+import { Toaster } from 'react-hot-toast';
+import useUserSignup from '../../hooks/userSignup'; // Import the custom hook
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -14,6 +16,7 @@ const Signup = () => {
   });
 
   const [errors, setErrors] = useState({});
+  const { signup, loading } = useUserSignup(); // Use the custom hook
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -23,11 +26,11 @@ const Signup = () => {
     });
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const newErrors = {};
 
-    // Form validation logic
+    // Form validation logic (you can also use the handleInputErrors here)
     if (!formData.username) {
       newErrors.username = 'Username is required';
     }
@@ -54,15 +57,17 @@ const Signup = () => {
       newErrors.email = 'Email is required';
     }
 
+    setErrors(newErrors);
+
+    // If no errors, proceed to signup
     if (Object.keys(newErrors).length === 0) {
-      console.log('Form submitted:', formData);
-    } else {
-      setErrors(newErrors);
+      await signup(formData); // Call the signup function from the hook
     }
   };
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
+      <Toaster position="top-right" reverseOrder={false} />
       <div className="flex w-full max-w-4xl bg-white shadow-lg">
         {/* Left Side (Logo Section) */}
         <div className="w-1/2 bg-gray-900 text-white flex justify-center items-center p-8">
@@ -187,7 +192,13 @@ const Signup = () => {
             </div>
 
             {/* Submit Button */}
-            <button className="bg-blue-800 text-white w-full py-3 rounded-lg font-semibold hover:bg-blue-900">Sign Up</button>
+            <button
+              className="bg-blue-800 text-white w-full py-3 rounded-lg font-semibold hover:bg-blue-900"
+              type="submit"
+              disabled={loading}
+            >
+              {loading ? 'Signing Up...' : 'Sign Up'}
+            </button>
 
             <div className="mt-6 text-center">
               <p>Already have an account? <Link to="/login" className="text-blue-600 hover:underline">Login</Link></p>

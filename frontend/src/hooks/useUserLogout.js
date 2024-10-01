@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { useAuthContext } from "../context/AuthContext";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const useUserLogout = () => {
   const [loading, setLoading] = useState(false);
   const { setAuthUser } = useAuthContext();
+  const navigate = useNavigate(); // Use navigate for redirection
 
   const logout = async () => {
     setLoading(true);
@@ -24,6 +26,9 @@ const useUserLogout = () => {
       localStorage.removeItem("user"); // Change to "user" for user logout
       setAuthUser(null); // Clear the authUser in context
       toast.success("Logout successful!"); // Show success toast
+
+      // Navigate to the home page
+      navigate("/");
     } catch (error) {
       // Handle errors and provide feedback
       console.error("Logout error:", error); // Log error for debugging
