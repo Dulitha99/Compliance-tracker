@@ -2,22 +2,21 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../assets/images/logo.png';
 import { FiSettings } from 'react-icons/fi';
-import useUserLogout from '../../hooks/useUserLogout'; // Import the user logout hook
+import useUserLogout from '../../hooks/useUserLogout'; 
+import useUserDetails from '../../hooks/getUserDetails'; 
 
 const Settings = () => {
-  // Dummy user data
-  const userInfo = {
-    username: 'johndoe',
-    company: 'CYBERX Solutions',
-    jobRole: 'Software Engineer',
-    email: 'johndoe@cyberx.com',
-  };
-
-  const { loading, logout } = useUserLogout(); // Use the user logout hook
+  const { loading, logout } = useUserLogout(); 
+  const { userDetails, loading: detailsLoading } = useUserDetails(); 
 
   const handleLogout = async () => {
-    await logout(); // Call the logout function from the hook
+    await logout(); 
   };
+
+  
+  if (detailsLoading) {
+    return <div>Loading user details...</div>; 
+  }
 
   return (
     <div className="flex min-h-screen bg-gray-50">
@@ -54,19 +53,23 @@ const Settings = () => {
           <div className="space-y-4">
             <div>
               <span className="font-medium text-gray-700">Username:</span>
-              <p className="text-gray-600">{userInfo.username}</p>
+              <p className="text-gray-600">{userDetails?.username}</p>
             </div>
             <div>
               <span className="font-medium text-gray-700">Company:</span>
-              <p className="text-gray-600">{userInfo.company}</p>
+              <p className="text-gray-600">{userDetails?.company}</p>
             </div>
             <div>
               <span className="font-medium text-gray-700">Job Role:</span>
-              <p className="text-gray-600">{userInfo.jobRole}</p>
+              <p className="text-gray-600">{userDetails?.jobRole}</p>
             </div>
             <div>
               <span className="font-medium text-gray-700">Email:</span>
-              <p className="text-gray-600">{userInfo.email}</p>
+              <p className="text-gray-600">{userDetails?.email}</p>
+            </div>
+            <div>
+              <span className="font-medium text-gray-700">Department:</span>
+              <p className="text-gray-600">{userDetails?.department}</p>
             </div>
           </div>
         </section>
