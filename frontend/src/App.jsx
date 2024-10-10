@@ -15,12 +15,12 @@ const App = () => {
     <div>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={authUser ? <Navigate to={authUser.role === 'admin' ? "/admindashboard" : "/userdashboard"} /> : <Login />} />
+        <Route path="/login" element={authUser ? <Navigate to="/userdashboard" /> : <Login />} />
         <Route path="/signup" element={authUser ? <Navigate to="/userdashboard" /> : <Signup />} />
         
-        <Route path="/userdashboard" element={authUser?.role === 'user' ? <UserDashboard /> : <Navigate to="/login" />} />
-        <Route path="/usersettings" element={authUser?.role === 'user' ? <SettingsUser /> : <Navigate to="/login" />} />
-        <Route path="/userpolicies" element={authUser?.role === 'user' ? <UserPolicies /> : <Navigate to="/login" />} />
+        <Route path="/userdashboard" element={authUser ? <UserDashboard /> : <Navigate to="/login" />} />
+        <Route path="/usersettings" element={authUser ? <SettingsUser /> : <Navigate to="/login" />} />
+        <Route path="/userpolicies" element={authUser ? <UserPolicies /> : <Navigate to="/login" />} />
     
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
